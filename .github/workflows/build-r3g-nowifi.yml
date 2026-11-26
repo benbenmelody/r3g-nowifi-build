@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: 检出构建仓库
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: 释放磁盘空间
         uses: jlumbroso/free-disk-space@main
@@ -104,7 +104,7 @@ jobs:
 
       - name: 上传固件（Artifacts）
         if: success()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: r3g-nowifi-firmware-${{ github.run_number }}
           path: out/
@@ -112,7 +112,7 @@ jobs:
 
       - name: 发布到 Releases
         if: success()
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: r3g-nowifi-${{ github.run_number }}
           name: "FanchmWrt R3G 无 WiFi 固件 #${{ github.run_number }}"
@@ -128,7 +128,7 @@ jobs:
 
       - name: 上传失败日志（仅失败时）
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: build-log-${{ github.run_number }}
           path: openwrt/build.log
